@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/ToDoFragment">
+
+    <fragment
+        android:id="@id/ToDoFragment"
+        android:name="com.example.myapplication.fragment.TodoFragment"
+        android:label="Using Retrofit"
+        tools:layout="@layout/fragment_first">
+    </fragment>
+
+    <fragment
+        android:id="@id/VolleyFragment"
+        android:name="com.example.myapplication.fragment.VolleyFragment"
+        android:label="Using Volley"
+        tools:layout="@layout/fragment_volley">
+    </fragment>
+
+</navigation>

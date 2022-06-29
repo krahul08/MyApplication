@@ -1,0 +1,15 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.example.myapplication.activity.MainActivity">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/ToDoFragment"
+            android:checked="true"
+            android:title="Retrofit" />
+        <item
+            android:id="@+id/VolleyFragment"
+            android:title="Volley" />
+
+    </group>
+</menu>
