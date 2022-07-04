@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.android.appcomponents.network.interfaces.VolleyAPIListener
-
 import com.android.appcomponents.network.interfaces.VolleyListener
 import com.android.appcomponents.viewmodel.NetworkAPIViewModel
 import com.android.appcomponents.viewmodel.NetworkAPIViewModelFactory
@@ -24,20 +23,23 @@ class VolleyViewModel(ctx: Fragment) : ViewModel() {
         }
     }
 
-    private val networkAPIViewModel: NetworkAPIViewModel = ViewModelProvider(ctx.requireActivity(),
-    NetworkAPIViewModelFactory(Constant.BASE_URL, ctx.requireContext())).get(NetworkAPIViewModel::class.java)
+    private val networkAPIViewModel: NetworkAPIViewModel = ViewModelProvider(
+        ctx.requireActivity(),
+        NetworkAPIViewModelFactory(Constant.BASE_URL, ctx.requireContext())
+    ).get(NetworkAPIViewModel::class.java)
 
     lateinit var apiListener: VolleyAPIListener
 
     fun getDataFromServer() {
         apiListener.onStarted()
         viewModelScope.launch {
-            Log.d("Rahul-Volley", "aaaaaaaaaaaaaaaaaaaaaaaaaa")
+            Log.d("Rahul-Volley", "Scope Launch")
             val volleyInstance = networkAPIViewModel.getVolleyClient()
-
-            volleyInstance.createGetWithoutParams(Constant.BASE_URL, "posts?id=4",
-                object : VolleyListener<String> {
+            Log.d("Rahul-Volley", "volleyInstance")
+            volleyInstance.getVolleyRequest(Constant.BASE_URL, "todos",
+                object : VolleyListener<String, String> {
                     override fun getResult(response: String) {
+                        Log.d("Rahul-Volley", "volleyResult")
                         apiListener.onSuccessResponse(response)
                     }
                 })

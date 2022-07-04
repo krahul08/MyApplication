@@ -31,17 +31,17 @@ class TodoViewModel(ctx: Fragment): ViewModel() {
                 //get retrofit instance from library
                 val retrofitInstance = networkAPIViewModel.getNetworkClient().create(NetworkAPI::class.java)
 
-                //Passing params to post request
-                val fieldMap = hashMapOf<String, Any>()
-                fieldMap.put("title", "New Title")
-                fieldMap.put("body", "New BOdy")
-                fieldMap.put("userId", 1)
+                    //Passing params to post request
+                    val fieldMap = hashMapOf<String, Any>()
+                    fieldMap.put("title", "New Title")
+                    fieldMap.put("body", "New BOdy")
+                    fieldMap.put("userId", 1)
                 //calling POST request
 //                val response = retrofitInstance.postRequest("posts", hashMapOf(), fieldMap)
 
                 //calling get request
-                val qeryMap = hashMapOf<String, String>()
-                qeryMap.put("name", "Shreeya")
+//                val qeryMap = hashMapOf<String, String>()
+//                qeryMap.put("name", "Shreeya")
                 val response = retrofitInstance.getRequest("todos", hashMapOf())
                 apiListener?.onSuccessResponse(response)
 

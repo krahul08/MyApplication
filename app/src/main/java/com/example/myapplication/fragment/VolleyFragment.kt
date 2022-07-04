@@ -13,8 +13,10 @@ import android.widget.Toast.makeText
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.appcomponents.network.interfaces.VolleyAPIListener
 import com.android.appcomponents.util.Utility
+import com.example.myapplication.adapter.ToDoAdapter
 import com.example.myapplication.databinding.VolleyFragmentBinding
 import com.example.myapplication.model.Todos
 import com.example.myapplication.utils.showSnackBar
@@ -79,8 +81,11 @@ class VolleyFragment : Fragment(), VolleyAPIListener {
     override fun onSuccessResponse(response: String) {
         _binding.progressBar.visibility = View.GONE
         val todos = GsonBuilder().create().fromJson(response, Todos::class.java)
-        Log.d("Rahul kumar", todos[0].title)
 
+        _binding.rvTodo.apply {
+            layoutManager = LinearLayoutManager(this.context)
+            adapter = ToDoAdapter(todos)
+        }
     }
 
     override fun onErrorResponse(errorMessage: String) {

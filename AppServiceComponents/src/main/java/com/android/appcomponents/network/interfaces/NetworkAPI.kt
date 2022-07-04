@@ -5,6 +5,7 @@ import okhttp3.ResponseBody
 import retrofit2.http.*
 
 interface NetworkAPI {
+
     @GET("{url}")
     suspend fun getRequest(
         @Path(value = "url") path: String,

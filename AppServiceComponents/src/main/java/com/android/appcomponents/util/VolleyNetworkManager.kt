@@ -13,7 +13,6 @@ import com.android.volley.toolbox.*
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.UnsupportedEncodingException
-import java.lang.reflect.Method
 import java.net.URLEncoder
 
 
@@ -60,11 +59,10 @@ class VolleyNetworkManager constructor(context: Context) {
     @return Str
      */
 
-    fun createGetWithoutParams(
+    fun getVolleyRequest(
         base_url: String,
-//params need to be change
         sub_url: String,
-        listener: VolleyListener<String>
+        listener: VolleyListener<String, String>
     ) {
         val request =
             JsonArrayRequest(Request.Method.GET, base_url + sub_url, null, { response ->
@@ -74,7 +72,7 @@ class VolleyNetworkManager constructor(context: Context) {
                     e.printStackTrace()
                 }
             }, { error ->
-                listener.getResult(error.localizedMessage)
+                error.localizedMessage?.let { listener.getResult(it) }
             })
         addToRequestQueue(request)
     }
@@ -84,7 +82,7 @@ class VolleyNetworkManager constructor(context: Context) {
      */
     private fun deleteRequest(
         base_url: String,
-        sub_url: String, listener: VolleyListener<String>
+        sub_url: String, listener: VolleyListener<String, Any?>
     ) {
         val request = StringRequest(
             Request.Method.DELETE, base_url + sub_url,
@@ -104,7 +102,7 @@ class VolleyNetworkManager constructor(context: Context) {
 
     fun getImage(
         imageUrl: String,
-        sub_url: String, listener: VolleyListener<String?>
+        sub_url: String, listener: VolleyListener<String?, Any?>
     ) {
         val imageRequest = ImageRequest(
             imageUrl + sub_url,
@@ -130,7 +128,7 @@ class VolleyNetworkManager constructor(context: Context) {
         base_url: String,
         sub_url: String,
         param1: Any?,
-        listener: VolleyListener<String?>
+        listener: VolleyListener<String?, Any?>
     ) {
         val jsonParams: MutableMap<String?, Any?> = HashMap()
         jsonParams["param1"] = param1
@@ -189,7 +187,7 @@ class VolleyNetworkManager constructor(context: Context) {
         val1: String,
         val2: String,
         val3: String,
-        listener: VolleyListener<String?>
+        listener: VolleyListener<String?, Any?>
 
     ) {
         /*params will come dynamic using constant */
